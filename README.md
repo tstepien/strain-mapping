@@ -5,7 +5,7 @@
 ## Programs
 
 + area_extraction
-++ [area_extraction/gettingareas.ijm](gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
+  + [gettingareas.ijm](area_extraction/gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
 
 ## Licensing
 Copyright 2012-2019 Lance Davidson, Holley Lynch, [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
