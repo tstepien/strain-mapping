@@ -1,0 +1,94 @@
+//Modified from IMAGE ANALYSIS macro make displacement maps.txt
+//Designed to be called from another macro and be passed the file path
+// for the raw file as the second argument.
+
+
+macro "DisplacementMaps"
+{
+	file = getArgument();
+	fileArray =split(file,"\\");
+	winPath = fileArray[0]+"\\";
+	for(m=1; m < lengthOf(fileArray);m++){
+		winPath = winPath+fileArray[m]+"\\";
+	}
+	pathArray = split(winPath,".");
+	pathLength = lengthOf(pathArray);
+	path = pathArray[0];
+	if(pathLength>2){
+		for (n = 1; n < (pathLength - 1);n++){
+		path = path+ "."+pathArray[n];
+		}
+	}
+	//print(path);
+	bigstring = File.openAsString(file);
+
+	returnString = raw2abs(bigstring, path);
+	//selectWindow(absdisWindow);close();
+	
+	return returnString;
+}
+
+
+
+function raw2abs(bigstring, path)
+{
+	lines = split(bigstring, "\n");
+
+	widstr = split(lines[0], "=");
+	heistr =  split(lines[1], "=");
+
+	width = parseInt(widstr[1]);
+	height = parseInt(heistr[1]);
+
+	// real data starts at lines[4].
+
+	newImage("rawX", "32-bit", width, height, 1);
+	selectWindow("rawX");
+
+	for (i=4; i<4+height; i++) 
+	{
+
+		pixels = split(lines[i],"");
+		for (j=1; j<width; j++)
+		{
+			x = j-1;
+			y = i-4;
+			setPixel(x, y, x - parseFloat(pixels[j-1]));
+		}
+
+	}
+
+	// *** this is the line I want to start the Y data.
+
+	newImage("rawY", "32-bit", width, height, 1);
+	selectWindow("rawY");
+
+	for (i=6+height; i<6+(2*height); i++) 
+	{
+
+		pixels = split(lines[i],"");
+		for (j=1; j<width; j++)
+		{
+			x = j-1;
+			y = i-(6+height);
+			setPixel(x, y, y - parseFloat(pixels[j-1]));
+		}
+	}
+
+	imageCalculator("Multiply create 32-bit", "rawX","rawX");
+	imageCalculator("Multiply create 32-bit", "rawY","rawY");
+	imageCalculator("Add create 32-bit", "Result of rawX","Result of rawY");
+	run("Square Root");
+	rename("AbsDisp");save(path+"_AbsDisp.tif"); close();
+
+	//
+	// close all other windows
+	//
+
+	selectWindow("rawX"); save(path+"_deltaX.tif");
+	selectWindow("rawY"); save(path+"_deltaY.tif");
+	selectWindow("Result of rawX"); close();
+	selectWindow("Result of rawY"); close();
+
+	return path;
+}

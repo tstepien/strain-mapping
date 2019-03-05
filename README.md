@@ -6,6 +6,13 @@
 
 + area_extraction
   + [gettingareas.ijm](area_extraction/gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
++ segmentation
+  + [SingleRoiBatchLevelSetMacro.ijm](segmentation/SingleRoiBatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with one ROI opened
+  + [BatchLevelSetMacro.ijm](segmentation/BatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with a small box ROI and large box ROI
++ strain_maps
+  + [DisplacementMaps.txt](strain_maps/DisplacementMaps.txt): place this file into the ImageJ>macros folder
+  + [StrainMapsFromDisplacementMaps.txt](strain_maps/StrainMapsFromDisplacementMaps.txt): place this file into the ImageJ>macros folder
+  + [Batch_Strain_Maps.ijm](strain_maps/Batch_Strain_Maps.ijm): run this program in ImageJ to calculate the strain maps for a time-lapse image
 
 ## Licensing
 Copyright 2012-2019 Lance Davidson, Holley Lynch, [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.

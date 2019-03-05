@@ -1,0 +1,365 @@
+// This macro was modified from: 
+// IMAGE ANALYSIS macro make principle strain maps from displacement maps.txt
+// and designed to be called from another macro. The x and y displacement files should
+// be open before it is called.
+//It assumses that DisplacementMaps.txt has been run prior.
+
+var nred, ngreen, nblue;
+var t1;
+var deltax, deltay, absdisp, angle;
+
+function setRGBPixel (x,y,r,g,b)
+{
+	setPixel(x,y,(r&0xff<<16+g&0xff<<8+b&0xff));
+}
+
+function XY2angle (x, y)
+{
+	pi = 4*atan(1.);
+	deg2rad = pi/180.;
+	
+	ix = x;
+	iy = y;
+
+	if (iy != 0)
+	{
+		if (ix > 0 )
+		{
+			//quad 1
+
+			if (iy>0) t1 = atan2(iy,ix)/deg2rad;
+
+			//quad 4
+
+			if (iy<0) t1 = 360. + atan2(iy, ix)/deg2rad;
+		}
+		if (ix < 0)
+		{
+
+			//quad 2
+
+			if (iy>0) t1 = atan2(iy,ix)/deg2rad;
+
+			//quad 3
+
+			if (iy<0) t1 = 360. + atan2(iy,ix)/deg2rad;
+		}
+		if (ix == 0)
+		{
+			//quad 2
+
+			if (iy>0) t1 = 90.;
+
+			//quad 3
+
+			if (iy<0) t1 = 270.;
+		}
+	}
+	
+	//special cases along x axis
+	if (iy == 0)
+	{	
+		t1 = 0;
+	
+		if (ix > 0)
+		{
+			t1 = 0;
+		}
+		if (ix < 0)
+		{
+			t1 = 180.;
+		}
+	}
+	return t1;
+}
+
+function hsl2rgb(Hdeg,S,L) // Based on algorithm found in "HSL and HSV" entry in wikipedia
+{
+	HK = Hdeg/360;     // convert from degrees to 0 to 1
+	
+	V = 1;
+	
+	if (S==0) {       // HSV values = From 0 to 1
+		R = V*255;     // RGB results = From 0 to 255
+		G = V*255;
+		B = V*255;}
+	else 
+	{
+		if (L >= 0.5)
+		{
+			Q = L + S - (L*S);
+		}
+		else
+		{
+			Q = L * (1 + S);
+		}
+		P = 2*L - Q;
+		
+		TR = HK + (1/3);
+		TG = HK;
+		TB = HK - (1/3);
+		
+		if (TR < 0) TR = TR + 1;
+		if (TG < 0) TG = TG + 1;
+		if (TB < 0) TB = TB + 1;
+		
+		if (TR > 1) TR = TR - 1;
+		if (TG > 1) TG = TG - 1;
+		if (TB > 1) TB = TB - 1;
+		
+		if (TR < (1/6))
+		{
+			R = P + ((Q-P)*6*TR);
+		}
+		else if (TR >= (1/6) && TR < (1/2))
+		{
+			R = Q;
+		}
+		else if (TR >= (1/2) && TR < (2/3))
+		{
+			R = P + ((Q-P)*6*((2/3)-TR));
+		}
+		else
+		{
+			R = P;
+		}
+		
+		if (TG < (1/6))
+		{
+			G = P + ((Q-P)*6*TG);
+		}
+		else if (TG >= (1/6) && TG < (1/2))
+		{
+			G = Q;
+		}
+		else if (TG >= (1/2) && TG < (2/3))
+		{
+			G = P + ((Q-P)*6*((2/3)-TG));
+		}
+		else
+		{
+			G = P;
+		}
+		
+		
+		if (TB < (1/6))
+		{
+			B = P + ((Q-P)*6*TB);
+		}
+		else if (TB >= (1/6) && TB < (1/2))
+		{
+			B = Q;
+		}
+		else if (TB >= (1/2) && TB < (2/3))
+		{
+			B = P + ((Q-P)*6*((2/3)-TB));
+		}
+		else
+		{
+			B = P;
+		}
+		
+		R = round(R*255);   //RGB results = From 0 to 255
+		G = round(G*255);
+		B = round(B*255);
+	}
+	nred = R; ngreen = G; nblue = B;
+	return;
+}
+
+macro "StrainMapsFromDisplacementMaps"{
+
+	path = getArgument();
+
+	setBatchMode(false);
+	deltax = "rawX";
+	deltay = "rawY";
+
+	selectWindow(deltax);
+
+	wid = getWidth();
+	hei = getHeight();
+	sli = nSlices;
+	
+	newImage("epsx", "32-bit", wid, hei, 1);
+	epsx = getTitle();
+	
+	setBatchMode(true);
+
+	for (k=0; k<=hei; k++) 
+	{
+	for (j=1; j<=wid; j++)
+	{
+		jm = j-1;
+		selectWindow(deltax);
+		
+		xm = getPixel(jm,k);		
+		x = getPixel(j,k);
+		
+		ex = x - xm;
+
+		selectWindow(epsx);
+		setPixel(j,k,ex);
+		
+	}
+	}
+
+	
+	setBatchMode(false);
+	
+	selectWindow(deltay);
+	wid = getWidth();
+	hei = getHeight();
+	sli = nSlices;
+	
+	newImage("epsy", "32-bit", wid, hei, 1);
+	epsy = getTitle();
+	
+	
+	setBatchMode(true);
+
+	for (j=0; j<=wid; j++)
+	{	
+	for (k=1; k<=hei; k++) 
+	{
+
+		km = k-1;
+		selectWindow(deltay);
+		
+		ym = getPixel(j,km);		
+		y = getPixel(j,k);
+		
+		ey = y - ym; 
+
+
+		selectWindow(epsy);
+		setPixel(j,k,ey);
+		
+	}
+	}	
+	
+	
+	
+	setBatchMode(false);
+	
+	
+	newImage("epsxy", "32-bit", wid, hei, 1);
+	epsxy = getTitle();
+
+	setBatchMode(true);
+
+	for (j=0; j<=wid; j++)
+	{	
+	for (k=1; k<=hei; k++) 
+	{
+
+		km = k-1;
+		selectWindow(deltax);
+		
+		ym = getPixel(j,km);		
+		y = getPixel(j,k);
+		
+		eps = y - ym; 
+
+
+		selectWindow(epsxy);
+		setPixel(j,k,eps);
+		
+	}
+	}	
+	
+	
+// this is an incorrect calculation go epsyx
+//	setBatchMode(false);
+
+//	newImage("epsyx", "32-bit", wid, hei, 1);
+//	epsyx = getTitle();
+
+//	setBatchMode(true);
+
+//	for (j=0; j<=wid; j++)
+//	{	
+//	for (k=1; k<=hei; k++) 
+//	{
+
+//		km = k-1;
+//		selectWindow(deltay);
+		
+//		xm = getPixel(j,km);		
+//		x = getPixel(j,k);
+		
+//		eps = x - xm; 
+
+
+//		selectWindow(epsyx);
+//		setPixel(j,k,eps);
+		
+//	}
+//	}	
+	
+	
+	
+	setBatchMode(false);
+
+	
+	newImage("eps1", "32-bit", wid, hei, 1);
+	eps1 = getTitle();
+	
+	newImage("eps2", "32-bit", wid, hei, 1);
+	eps2 = getTitle();
+	
+	newImage("theta", "32-bit", wid, hei, 1);
+	theta = getTitle();
+	
+	setBatchMode(true);
+
+	for (j=1; j<=wid; j++)
+	{	
+	for (k=1; k<=hei; k++) 
+	{
+
+		selectWindow(epsx);
+		ex = getPixel(j,k);
+		
+		selectWindow(epsy);
+		ey = getPixel(j,k);
+		
+		selectWindow(epsxy);
+		exy = getPixel(j,k);
+
+		selectWindow(epsyx);
+		eyx = getPixel(j,k);
+
+		eavg = (exy+eyx)/2;
+		
+		plus =sqrt(0.25*(ex-ey)*(ex-ey) + eavg*eavg);
+
+		e1 = 0.5*(ex + ey) + plus;
+		e2 = 0.5*(ex + ey) - plus;
+		
+		t = 0.5*XY2angle(ex-ey, 2*eavg); // is it fair to just do this?
+
+		selectWindow(eps1);
+		setPixel(j,k,e1);
+		
+		selectWindow(eps2);
+		setPixel(j,k,e2);
+		
+		selectWindow(theta);
+		setPixel(j,k,t);
+		
+
+	}
+	}	
+	
+	selectWindow(epsx); save(path+"_epsx.tif"); close();
+	selectWindow(epsy); save(path+"_epsy.tif"); close();
+	selectWindow(epsxy); save(path+"_epsxy.tif"); close();
+	selectWindow(epsyx); save(path+"_epsyx.tif"); close();
+	selectWindow(eps1); save(path+"_eps1.tif"); close();
+	selectWindow(eps2); save(path+"_eps2.tif"); close();
+	selectWindow(theta); save(path+"_theta.tif"); close();
+
+	setBatchMode(false);
+
+}
