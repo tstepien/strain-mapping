@@ -17,14 +17,14 @@ A strain mapping method is developed to calculate the deformation of a tissue vi
 
 ### Segmentation
 
-Before strain mapping can be computed, the first step is to segment the time-lapse sequence of images so that a mask is created showing where the tissue is in the image. The relevant code is located in the [segmentation](segmentation/) folder:
+Before strain mapping can be computed, the first step is to segment the time-lapse sequence of images so that a mask is created showing where the tissue is in the image. The relevant ImageJ code is located in the [segmentation](segmentation/) folder:
 
 + [SingleRoiBatchLevelSetMacro.ijm](segmentation/SingleRoiBatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with one ROI opened
 + [BatchLevelSetMacro.ijm](segmentation/BatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with a small box ROI and large box ROI
 
 ### Strain Mapping
 
-The relevant code for strain mapping is located in the [strain_maps](strain_maps/) folder:
+The relevant ImageJ code for strain mapping is located in the [strain_maps](strain_maps/) folder:
 
 + [DisplacementMaps.txt](strain_maps/DisplacementMaps.txt): place this file into the ImageJ>macros folder
 + [StrainMapsFromDisplacementMaps.txt](strain_maps/StrainMapsFromDisplacementMaps.txt): place this file into the ImageJ>macros folder
@@ -34,17 +34,22 @@ The relevant code for strain mapping is located in the [strain_maps](strain_maps
 
 ### Area Extraction
 
-The relevant code for calculating the area of segmented images is located in the [area_extraction](area_extraction/) folder:
+The relevant ImageJ code for calculating the area of segmented images is located in the [area_extraction](area_extraction/) folder:
 
 + [gettingareas.ijm](area_extraction/gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
 
 ### Boundary Extraction
 
-The relevant code for finding the boundary locations of segmented images is located in the [boundary_extraction](boundary_extraction/) folder:
+The relevant ImageJ code for finding the boundary locations of segmented images is located in the [boundary_extraction](boundary_extraction/) folder:
 
 + [gettingboundaries.ijm](boundary_extraction/gettingboudaries.ijm): run this program in ImageJ to extract the boundary locations of a segmented image in pixels
 
 ### Conversion of ImageJ data to MATLAB
+
+The relevant MATLAB code for inputting ImageJ data from the Strain Mapping Method (strain .tiff image files) and Boundary Extraction (.txt files) and converting into MATLAB .mat files is located in the [convert_imagej_to_matlab](convert_imagej_to_matlab/) folder:
+
++ [prepare_data_onelayer.m](convert_imagej_to_matlab/prepare_data_onelayer.m): run this program in MATLAB to convert strain and boundary ImageJ data to MATLAB data
++ [prepare_data_subfun.m](convert_imagej_to_matlab/prepare_data_subfun.m): this is a sub-function of the previous file - place this file into the same folder as prepare_data_onelayer.m
 
 
 ## Licensing
