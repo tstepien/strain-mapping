@@ -32,9 +32,17 @@ The relevant code for strain mapping is located in the [strain_maps](strain_maps
 
 ## Other Image Analysis
 
-Other information can be extracted from the images.  For example, the relevant code for calculating the area of segmented images is located in the [area_extraction](area_extraction/) folder:
+### Area Extraction
+
+The relevant code for calculating the area of segmented images is located in the [area_extraction](area_extraction/) folder:
 
 + [gettingareas.ijm](area_extraction/gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
+
+### Boundary Extraction
+
+The relevant code for finding the boundary locations of segmented images is located in the [boundary_extraction](boundary_extraction/) folder:
+
++ [gettingboundaries.ijm](boundary_extraction/gettingboudaries.ijm): run this program in ImageJ to extract the boundary locations of a segmented image in pixels
 
 ### Conversion of ImageJ data to MATLAB
 
