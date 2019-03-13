@@ -15,4 +15,4 @@
   + [Batch_Strain_Maps.ijm](strain_maps/Batch_Strain_Maps.ijm): run this program in ImageJ to calculate the strain maps for a time-lapse image
 
 ## Licensing
-Copyright 2012-2019 Lance Davidson, Holley Lynch, [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
+Copyright 2012-2019 [Lance Davidson](http://github.com/ladavidson/), [Holley Lynch](http://github.com/helynch), [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
