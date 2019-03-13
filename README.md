@@ -13,14 +13,16 @@ A strain mapping method is developed to calculate the deformation of a tissue vi
 
 *Applications:* The code in this package is developed for [ImageJ](https://imagej.nih.gov/ij/)/[Fiji](https://fiji.sc/) and [MATLAB](https://www.mathworks.com/products/matlab.html). Furthermore, [bUnwarpJ](https://imagej.net/BUnwarpJ) is a required plug-in for ImageJ/Fiji.
 
-## Segmentation
+## Strain Mapping Method
+
+### Segmentation
 
 Before strain mapping can be computed, the first step is to segment the time-lapse sequence of images so that a mask is created showing where the tissue is in the image. The relevant code is located in the [segmentation](segmentation/) folder:
 
 + [SingleRoiBatchLevelSetMacro.ijm](segmentation/SingleRoiBatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with one ROI opened
 + [BatchLevelSetMacro.ijm](segmentation/BatchLevelSetMacro.ijm): run this program in ImageJ to segment a time-lapse sequence with a small box ROI and large box ROI
 
-## Strain Mapping
+### Strain Mapping
 
 The relevant code for strain mapping is located in the [strain_maps](strain_maps/) folder:
 
@@ -34,7 +36,7 @@ Other information can be extracted from the images.  For example, the relevant c
 
 + [gettingareas.ijm](area_extraction/gettingareas.ijm): run this program in ImageJ to extract the areas of a segmented image in pixels
 
-## Conversion of ImageJ data to MATLAB
+### Conversion of ImageJ data to MATLAB
 
 
 ## Licensing
