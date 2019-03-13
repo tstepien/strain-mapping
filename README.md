@@ -53,4 +53,4 @@ The relevant MATLAB code for inputting ImageJ data from the Strain Mapping Metho
 
 
 ## Licensing
-Copyright 2012-2019 [Lance Davidson](http://github.com/ladavidson/), [Holley Lynch](http://github.com/helynch), [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
+Copyright 2012-2019 [Lance Davidson](http://github.com/ladavidson/), [Holley Lynch](http://github.com/helynch/), [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
