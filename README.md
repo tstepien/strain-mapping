@@ -3,7 +3,7 @@
 <a href="https://github.com/tstepien/strain-mapping/"><img src="https://img.shields.io/badge/GitHub-tstepien%2Fstrain--mapping-blue.svg" /></a> <a href="https://doi.org/10.1371/journal.pone.0218021"><img src="https://img.shields.io/badge/doi-10.1371%2Fjournal.pone.0218021-orange.svg" /></a> <a href="https://doi.org/10.1101/460774"><img src="https://img.shields.io/badge/bioRxiv-460774-orange.svg" /></a> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 
 The code contained in the strain-mapping project was developed for work in the [Mechanics of Morphogenesis/Davidson Lab](http://mechmorpho.org/) and described in various papers including:
-><a href="http://math.arizona.edu/~stepien/">Tracy L. Stepien</a>, [Holley E. Lynch](https://www.stetson.edu/other/faculty/holley-lynch.php), Shirley X. Yancey, Laura Dempsey, and [Lance A. Davidson](http://mechmorpho.org/), Using a continuum model to decipher the mechanics of embryonic tissue spreading from time-lapse image sequences: An approximate Bayesian computation approach, *PLOS ONE*, 14 (2019), e0218021, DOI: [10.1371/journal.pone.0218021](https://doi.org/10.1371/journal.pone.0218021).
+><a href="http://github.com/tstepien/">Tracy L. Stepien</a>, [Holley E. Lynch](https://www.stetson.edu/other/faculty/holley-lynch.php), Shirley X. Yancey, Laura Dempsey, and [Lance A. Davidson](http://mechmorpho.org/), Using a continuum model to decipher the mechanics of embryonic tissue spreading from time-lapse image sequences: An approximate Bayesian computation approach, *PLOS ONE*, 14 (2019), e0218021, DOI: [10.1371/journal.pone.0218021](https://doi.org/10.1371/journal.pone.0218021).
 
 A strain mapping method is developed to calculate the deformation of a tissue via estimates of the engineering/Cauchy strains ε_{xx}, ε_{yy}, ε_{xy}, and ε_{yx}, and the displacement gradient ∇u between two images in a time-lapse sequence.
 
@@ -53,4 +53,4 @@ The relevant MATLAB code for inputting ImageJ data from the Strain Mapping Metho
 
 
 ## Licensing
-Copyright 2012-2019 [Lance Davidson](http://github.com/ladavidson/), [Holley Lynch](http://github.com/helynch/), [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
+Copyright 2012-2019 [Lance Davidson](http://mechmorpho.org/), [Holley Lynch](https://www.stetson.edu/other/faculty/holley-lynch.php), [Tracy Stepien](http://github.com/tstepien/).  This is free software made available under the MIT License. For details see the LICENSE file.
