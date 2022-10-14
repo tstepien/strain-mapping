@@ -227,7 +227,7 @@ for(j=0; j < roiCount; j++){
 		activeImage = getTitle();
 		print("Post-close active image is:",activeImage);
 		//selectWindow("Segmentation progress of "+k); close();
-		selectWindow(k); close();
+		//selectWindow(k); close();
 		//roiManager("Delete");
 		//roiManager("Open", tempDir+"CompleteRoiSet.zip");
 		call("java.lang.System.gc"); 
@@ -237,7 +237,7 @@ for(j=0; j < roiCount; j++){
          			 close(); 
   		  } 
 	}
-	firstDraw = "["+tempDir+"Draw_"+j+"_"+k+".tif]";
+	firstDraw = tempDir+"Draw_"+j+"_"+k+".tif";
 	firstSeg = tempDir+"Seg_"+j+"_"+k+".tif";
 	seqDraw = savePath+"Draw_"+j+".tif";
 	seqSeg = savePath+"Seg_"+j+".tif";
