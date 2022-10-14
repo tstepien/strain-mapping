@@ -68,7 +68,7 @@ call("java.lang.System.gc");
 		activeImage = getTitle();
 		print("Post-close active image is:",activeImage);
 		//selectWindow("Segmentation progress of "+k); close();
-		selectWindow(k); close();
+		//selectWindow(k); close();
 		//roiManager("Delete");
 		//roiManager("Open", tempDir+"CompleteRoiSet.zip");
 		call("java.lang.System.gc"); 
