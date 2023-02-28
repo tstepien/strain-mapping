@@ -32,6 +32,12 @@ The relevant ImageJ code for strain mapping is located in the [strain_maps](stra
 
 ## Other Image Analysis
 
+### Crop or Extend
+
+The relevant ImageJ code for cropping or extending the image/segmentation files (so that they are smaller to reduce computational cost but also to limit the numerical boundary effects on the strain mapping) is located in the [crop_extend](crop_extend/) folder:
+
++ [croppingOrExtending_amount_and_newfiles.ijm](crop_extend/croppingOrExtending_amount_and_newfiles.ijm): run this program in ImageJ to crop or extend the image and segmentation to reduce computational costs and limit numerical boundary effects
+
 ### Area Extraction
 
 The relevant ImageJ code for calculating the area of segmented images is located in the [area_extraction](area_extraction/) folder:
